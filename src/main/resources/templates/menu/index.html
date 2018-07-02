@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head th:replace="fragments :: head"></head>
+    <body class="container">
+        <h1 th:text="${title}">Default Title</h1>
+
+        <table class="table">
+
+            <tr>
+                <th>Name</th>
+            </tr>
+
+            <ul th:each="menu : ${menus}">
+                <a th:href="'/menu/view/' + ${menu.id}"><li th:text="${menu.name}"></li></a>
+            </ul>
+
+        </table>
+
+        <nav th:fragment="navigation">
+            <a href="/menu/add">Add Menu</a>
+        </nav>
+    </body>
+</html>

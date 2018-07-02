@@ -9,11 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.persistence.OneToMany;
-
+import javax.persistence.ManyToMany;
 
 @Entity
-public class Category {
+public class Menu {
+
     @Id
     @GeneratedValue
     private int id;
@@ -22,16 +22,12 @@ public class Category {
     @Size(min = 3, max = 15)
     private String name;
 
-    public Category() {
-    }
+    @ManyToMany
+    private List<Cheese> cheeses;
 
-    public Category(String name) {
-        this.name = name;
-    }
+    public Menu() {}
 
-    @OneToMany
-    @JoinColumn(name = "category_id")
-    private List<Cheese> cheeses = new ArrayList<>();
+    public void addItem(Cheese item){ cheeses.add(item); }
 
     public int getId() {
         return id;
@@ -39,6 +35,10 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    public List<Cheese> getCheeses(){
+        return cheeses;
     }
 
     public void setName(String name) {
